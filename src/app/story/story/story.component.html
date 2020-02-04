@@ -1,37 +1,52 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="row justify-content-center align-content-center">
-            <div class="img" *ngFor="let item of story ;let i = index">
-                <div>
-                    <h5 class="float-right">{{i}}</h5>
-                    <img [src]="item.src" alt="" style="width: 80px; height: 80px;">
+<div cdkDropListGroup>
+    <div class="example-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row justify-content-center align-content-center"
+                 cdkDropList 
+                 #todoList="cdkDropList"
+                [cdkDropListData]="story" 
+                [cdkDropListConnectedTo]="[doneList]" >
+                    <div class="img" *ngFor="let item of story ;let i = index" cdkDrag>
+                        <div>
+                            <img [src]="item.src" alt="" style="width: 80px; height: 80px;">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <h2 class=" col-md-12 text-center text-white my-2">Storytelling</h2>
-    <div class="col-md-12">
-        <div class="row justify-content-center flex-column align-content-center">
-            <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                <div class="example-box my-1" *ngFor="let story of story" cdkDrag>
-                    <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-                    <div class="card-image">
-                        <img [src]="story.src">
-                    </div>
-                    <ng-container *ngIf="!saveText">
-                        <div class="card-content">
-                            <input type="text" class="form-control mr-1" placeholder="Type a story "
-                                [(ngModel)]="story.text" name="story.text">
+            <h2 class=" col-md-12 text-center text-white my-2">Storytelling</h2>
+            <div class="col-md-12">
+                <div class="row justify-content-center flex-column align-content-center">
+                    <div cdkDropList 
+                    #doneList="cdkDropList" 
+                    [cdkDropListData]="done" 
+                    [cdkDropListConnectedTo]="[todoList]"
+                    (cdkDropListDropped)="drop($event)"
+                    class="drop-container">
+                        <div class="example-box my-1" *ngFor="let story of done;let j = index" cdkDrag>
+                            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                            <div class="card-image">
+                                <img [src]="story.src">
+                            </div>
+                            <ng-container *ngIf="!saveText">
+                                <div class="card-content">
+                                    <input type="text" class="form-control mr-1" placeholder="Type a story "
+                                        [(ngModel)]="story.text" name="story.text">
+                                </div>
+                                <span class="btn btn-outline-primary btn" (click)="save()"><i
+                                        class="fa fa-save"></i></span>
+                                <span class="btn btn-outline-danger btn btn-save" (click)="reset(story)"><i
+                                        class="fa fa-times"></i></span>
+                            </ng-container>
+                            <span *ngIf="saveText" class="btn btn-outline-danger btn btn-del" (click)="delete(j)">
+                                <i class="fa fa-trash"></i></span>
+
+                                <span *ngIf="saveText" class="btn btn-outline-primary btn btn-edit" (click)="edit()"><i
+                                        class="fa fa-edit"></i></span>
+                            <div class="card-story">
+                                {{story.text}}
+                            </div>
                         </div>
-                        <span class="btn btn-outline-primary btn" (click)="save()"><i
-                        class="fa fa-save"></i></span>
-                        <span class="btn btn-outline-primary btn btn-save" (click)="reset(story)"><i
-                            class="fa fa-times"></i></span>
-                    </ng-container>
-                    <span *ngIf="saveText" class="btn btn-outline-primary btn btn-edit" (click)="edit()"><i
-                        class="fa fa-edit"></i></span>
-                    <div class="card-story">
-                        {{story.text}}
                     </div>
                 </div>
             </div>

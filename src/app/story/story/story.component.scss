@@ -1,5 +1,4 @@
 
-
 .example-list {
     max-width: 100%;
     border: solid 1px #ccc;
@@ -122,5 +121,16 @@ img {
 }
 
 .btn-edit {
+    right: 60px;
+}
+
+.drop-container {
+    width: 500px;
+    height: 400px;
+    border: 1px solid white;
+}
+
+.btn-del {
     right: 10px;
+    color: red;
 }
