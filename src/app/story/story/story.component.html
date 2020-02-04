@@ -7,14 +7,14 @@
                  #todoList="cdkDropList"
                 [cdkDropListData]="story" 
                 [cdkDropListConnectedTo]="[doneList]" >
-                    <div class="img" *ngFor="let item of story ;let i = index" cdkDrag>
+                    <div class="img mx-1" *ngFor="let item of story ;let i = index" cdkDrag>
                         <div>
-                            <img [src]="item.src" alt="" style="width: 80px; height: 80px;">
+                            <img [src]="item.src" alt="" style="width: 150px; height: 150px;">
                         </div>
                     </div>
                 </div>
             </div>
-            <h2 class=" col-md-12 text-center text-white my-2">Storytelling</h2>
+            <h2 class=" col-md-12 text-center text-white my-2">Story Telling</h2>
             <div class="col-md-12">
                 <div class="row justify-content-center flex-column align-content-center">
                     <div cdkDropList 
@@ -23,6 +23,9 @@
                     [cdkDropListConnectedTo]="[todoList]"
                     (cdkDropListDropped)="drop($event)"
                     class="drop-container">
+                    <div class="empty" *ngIf="done.length <= 0">
+                        <h6 class="text-white text-center mt-5">Drag Item Hire!</h6>
+                    </div>
                         <div class="example-box my-1" *ngFor="let story of done;let j = index" cdkDrag>
                             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                             <div class="card-image">

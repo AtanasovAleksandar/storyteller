@@ -126,7 +126,8 @@ img {
 
 .drop-container {
     width: 500px;
-    height: 400px;
+    min-height: 400px;
+    height: auto;
     border: 1px solid white;
 }
 
